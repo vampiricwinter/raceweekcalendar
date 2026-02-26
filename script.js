@@ -15,7 +15,7 @@ function load() {
   const firstDayOfMonth = new Date(year, month, 1);
   const daysInMonth = new Date(year, month + 1, 0).getDate();
 
-  const dateString = firstDayOfMonth.toLocaleDateString('en-gb', {
+  const dateString = firstDayOfMonth.toLocaleDateString('en-us', {
     weekday: 'long',
     year: 'numeric',
     month: 'numeric',
@@ -24,6 +24,20 @@ function load() {
   
   const paddingDays = weekdays.indexOf(dateString.split(', ')[0]);
   
+  for(let i = 1; i <= paddingDays + daysInMonth; i++) {
+    const daySquare = document.createElement('div');
+    daySquare.classList.add('day');
+
+    if(i > paddingDays) {
+      daySquare.innerText = i - paddingDays;
+
+      daySquare.addEventListener('click', () => console.log('click'));
+    } else {
+      daySquare.classList.add('padding');
+    }
+
+    calendar.appendChild(daySquare);
+  }
 }
 
 
